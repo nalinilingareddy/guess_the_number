@@ -1,0 +1,17 @@
+<resources>
+    <color name="colorPrimary">#000080</color>
+    <color name="colorPrimaryDark">#000080</color>
+    <color name="colorAccent">#03DAC5</color>
+        <!-- Primary Colors -->
+        <color name="navy_blue">#003366</color>
+        <color name="coral">#FF6F61</color>
+        <color name="teal">#009688</color>
+        <color name="gold">#FFEB3B</color>
+
+        <!-- Neutral Colors -->
+        <color name="light_gray">#F5F5F5</color>
+        <color name="dark_gray">#212121</color>
+        <color name="white">#FFFFFF</color>
+        <color name="black">#000000</color>
+    </resources>
+
