@@ -2,11 +2,16 @@ package com.example.guessthenumber
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
+import com.example.guessthenumber.R
+import androidx.appcompat.app.AlertDialog
 
 object GameExtras {
     const val EXTRA_FIRST_GUESS = "com.example.guessthenumber.FIRST_GUESS"
@@ -26,6 +31,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        // Find the toolbar view and set it as the ActionBar
+        val toolbar: Toolbar = findViewById(R.id.toolbar)
+        setSupportActionBar(toolbar)
+
         guessInput = findViewById(R.id.guessInput)
         submitButton = findViewById(R.id.submitButton)
         attemptsTextView = findViewById(R.id.titleTextView)
@@ -36,6 +45,40 @@ class MainActivity : AppCompatActivity() {
         submitButton.setOnClickListener {
             handleFirstGuess()
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.main_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_notes -> {
+                showHints()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    private fun showHints() {
+        val hints = """
+        Hints for Guessing:
+        1. The number is between 1 and 100.
+        2. If your guess is too high, try a much lower number.
+        3. If your guess is too low, try a much higher number.
+        4. Pay attention to the hints provided after each guess.
+        5. You have a limited number of attempts, so use them wisely!
+    """.trimIndent()
+
+
+        val builder = androidx.appcompat.app.AlertDialog.Builder(this)
+        builder.setTitle("Game Hints")
+            .setMessage(hints)
+            .setPositiveButton("OK") { dialog, _ -> dialog.dismiss() }
+            .create()
+            .show()
     }
 
     private fun handleFirstGuess() {
